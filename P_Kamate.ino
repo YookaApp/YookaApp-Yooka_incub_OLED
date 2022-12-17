@@ -79,11 +79,9 @@ void loop() {
      
      // telechargement des donnees apres chaque seconde
       download_time(&DateTime); // mise a jour de l'heure      
-      getTemperature(&tempe);  //mise a jour de la temperature
-            
-     if((tempe > 0) && (tempe < 100)){  //Elimination des valeurs indesirables
+      getTemperature(&tempe);  //mise a jour de la temperature            
       affichage();
-   }
+
   }
   wdt_reset(); // a la fin de chaque boucle on initialise le compteur */
 }
@@ -103,7 +101,7 @@ void appel_fonction(){
 
 
 void control_temperature(){
-if((tempe > 0) && (tempe < 100)){ //on filtre et elimine les parasites 
+
   if(tempe <= 37.5){
    digitalWrite(RELAIS_RES, HIGH);
   }
@@ -111,7 +109,6 @@ if((tempe > 0) && (tempe < 100)){ //on filtre et elimine les parasites
   else if(tempe > 37.76){
    digitalWrite(RELAIS_RES, LOW);
     }
-  }
 }
 
 
@@ -137,7 +134,7 @@ void control_leds(){
 
 void control_buzzer(){
  
-  if(tempe > 38.4){  
+  if(tempe > 38.4 || tempe < 25 ){  
        if(( millis() - temp_buzzer) >= 500){
         temp_buzzer= millis();
         state_buzzer= !state_buzzer;
