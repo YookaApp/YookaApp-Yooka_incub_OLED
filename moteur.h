@@ -8,7 +8,7 @@
 #define PIN_FIN_de_COURSE_D 5  //fin de course pres de la porte
 #define PIN_RETOURNEMENT 7
 // deadline
-#define DEADLINE 3
+#define DEADLINE 1
 int HourNow = 0; // variable content a Hour now
 
 //ce fichier contient les fonction permettant le retournement des oeufs grace au moteur
@@ -49,12 +49,12 @@ void control_Fin_de_course() {
   bool data1 = digitalRead(PIN_FIN_de_COURSE_G);
   bool data2 = digitalRead(PIN_FIN_de_COURSE_D);
 
-  if ( (data1 != memorie_btG) && (data1 == true) ) {
+  if ( (data1 != memorie_btG) && (data1 == true) && !data2) {
     valider = false ;  //arret moteurs
     etat_bts = 1; //dans l'autre cas on change de sens
   }
 
-  if ((data2 != memorie_btD) && (data2 == true)) {
+  if ((data2 != memorie_btD) && (data2 == true) && !data1) {
     valider = false ;  //arret moteurs
     etat_bts = 0; //dans l'autre cas on change de sens
   }
