@@ -66,7 +66,7 @@ void setup() {
     
   //(sec, mins, heur, dow, dom, moi, an) mise a jours de l'heure et de la date
   //update_time(0, 53, 16, 5, 5, 5, 23);
-  HourNow = DateTime.mins;
+  HourNow = DateTime.incremente_hours;
   initial_retournement();
   wdt_reset(); // remise a zero du compteur de watch dog avant la boucle principale: loop()
  } 
