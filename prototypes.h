@@ -11,7 +11,7 @@ struct dateTime_t{
    byte dom;  //dayOfMonth(1-30/31)
    byte month;
    byte year;
-   byte incremente_hours;
+   int incremente_hours;
    
 }DateTime;
 
@@ -44,6 +44,7 @@ String decode_month(byte);
 
 //fonction de mise ajour du temp
 void update_time(byte, byte, byte, byte, byte, byte, byte);
+void update_deadline_Hours(int);
 void download_time(dateTime_t *);
 
 //convertisseur des donnees

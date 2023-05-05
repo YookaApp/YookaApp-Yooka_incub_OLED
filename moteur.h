@@ -8,7 +8,7 @@
 #define PIN_FIN_de_COURSE_D 5  //fin de course pres de la porte
 #define PIN_RETOURNEMENT 7
 // deadline
-#define DEADLINE 4
+#define DEADLINE 3
 int HourNow = 0; // variable content a Hour now
 
 //ce fichier contient les fonction permettant le retournement des oeufs grace au moteur
@@ -32,8 +32,8 @@ void initial_retournement(){
 void control_hour() {
   int deadlineNow = DateTime.incremente_hours;
    
-   if(HourNow != DateTime.hours){
-      HourNow = DateTime.hours;
+   if(HourNow != DateTime.mins){
+      HourNow = DateTime.mins;
       deadlineNow = deadlineNow + 1;
 
         if(deadlineNow >= DEADLINE){

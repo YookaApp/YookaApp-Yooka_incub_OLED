@@ -4,6 +4,7 @@
 
    //Constantes pour le module RTC 
 #define ADRESS_RTC 0x68 // qui vaut 104 en decimal
+#define ADRESS_EEPROM 8
 
 //convertisseur des donnees
 byte decimal_hexa(byte);
@@ -21,7 +22,7 @@ void download_time(dateTime_t *now){  //now est (une structure) variable de type
   Wire.beginTransmission(ADRESS_RTC);
   Wire.write(0);         //on remet a zero le curseur
   Wire.endTransmission();
-  Wire.requestFrom(ADRESS_RTC, 7);
+  Wire.requestFrom(ADRESS_RTC, 9);
   byte secondes =Wire.read();
   
   now->sec   = decimal_hexa(secondes);
@@ -50,6 +51,15 @@ void update_time(byte secondes, byte minutes, byte heures, byte dows, byte doms,
   Wire.endTransmission();
   
 }
+
+void update_deadline_Hours(int data){
+  
+  Wire.beginTransmission(ADRESS_RTC);
+  Wire.write(ADRESS_EEPROM);                      // pointage vers l'octet
+  Wire.write(hexa_decimal(data));
+  Wire.endTransmission();  
+}
+
 
 String decode_dow(byte day){
   String data;
