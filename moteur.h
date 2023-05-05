@@ -7,11 +7,13 @@
 #define PIN_FIN_de_COURSE_G 6  // fin de course au fond de l'incubateur
 #define PIN_FIN_de_COURSE_D 5  //fin de course pres de la porte
 #define PIN_RETOURNEMENT 7
+// deadline
+#define DEADLINE 4
+int HourNow = 0; // variable content a Hour now
 
 //ce fichier contient les fonction permettant le retournement des oeufs grace au moteur
 boolean valider = false, etat_bts = true;
 bool memorie_btG = false, memorie_btD = false, flag_manuelRetour = false; // detections d'apuis sur le boutons
-char heure_actuelle;
 
 void initial_retournement(){
   bool datag = digitalRead(PIN_FIN_de_COURSE_G);
@@ -28,8 +30,8 @@ void initial_retournement(){
 
 
 void control_hour() {
-    if( DateTime.mins =! heure_actuelle){
-     heure_actuelle = DateTime.mins;
+    if( DateTime.mins !=  HourNow){
+     HourNow = DateTime.mins;
      valider = true;
     }
 }

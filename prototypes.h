@@ -11,6 +11,7 @@ struct dateTime_t{
    byte dom;  //dayOfMonth(1-30/31)
    byte month;
    byte year;
+   byte incremente_hours;
    
 }DateTime;
 
