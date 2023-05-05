@@ -136,7 +136,7 @@ void control_leds(){
 
 void control_buzzer(){
  
-  if(tempe > 38.4 || tempe < 25 ){  
+  if(tempe > 38.4 || tempe < 25 || valider){  
        if(( millis() - temp_buzzer) >= 500){
         temp_buzzer= millis();
         state_buzzer= !state_buzzer;

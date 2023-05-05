@@ -30,10 +30,19 @@ void initial_retournement(){
 
 
 void control_hour() {
-    if( DateTime.mins !=  HourNow){
-     HourNow = DateTime.mins;
-     valider = true;
-    }
+  int deadlineNow = DateTime.incremente_hours;
+   
+   if(HourNow != DateTime.hours){
+      HourNow = DateTime.hours;
+      deadlineNow = deadlineNow + 1;
+
+        if(deadlineNow >= DEADLINE){
+                 deadlineNow = 0;
+                 valider = true;
+                 }    
+      update_deadline_Hours(deadlineNow); // save incremente hour
+      Serial.print("Incremente OK ");
+   }
 }
 
 void control_Fin_de_course() {
