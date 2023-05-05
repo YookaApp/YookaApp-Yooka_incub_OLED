@@ -12,7 +12,6 @@ byte hexa_decimal(byte);
 //fonction de mise ajour du temp
 void update_time(byte, byte, byte, byte, byte, byte, byte); 
 void download_time(dateTime_t *); 
-byte calcul_day();
 
 //convertisseur des donnees
 byte decimal_hexa(byte);

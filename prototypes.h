@@ -17,7 +17,7 @@ struct dateTime_t{
 //QUELQUES VARIABLES GLOBALES DU PROGRAMME 
 //variable pour la temperature et l'humidity
 float tempe;
-char humidy;
+float humidy;
 
 //FONCTIONS POUR LA LECTURE DU CAPTEUR DHT22
 
