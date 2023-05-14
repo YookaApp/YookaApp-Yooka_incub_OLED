@@ -11,13 +11,14 @@ struct dateTime_t{
    byte dom;  //dayOfMonth(1-30/31)
    byte month;
    byte year;
+   int incremente_hours;
    
 }DateTime;
 
 //QUELQUES VARIABLES GLOBALES DU PROGRAMME 
 //variable pour la temperature et l'humidity
 float tempe;
-char humidy;
+float humidy;
 
 //FONCTIONS POUR LA LECTURE DU CAPTEUR DHT22
 
@@ -43,6 +44,7 @@ String decode_month(byte);
 
 //fonction de mise ajour du temp
 void update_time(byte, byte, byte, byte, byte, byte, byte);
+void update_deadline_Hours(int);
 void download_time(dateTime_t *);
 
 //convertisseur des donnees

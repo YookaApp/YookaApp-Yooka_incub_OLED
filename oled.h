@@ -13,56 +13,54 @@ void affichage(){
   oled.println("Incubator");
   
   oled.setTextSize(2);
-  oled.setCursor(0,25);
-  oled.println(tempe, 1);
-  oled.setCursor(50,30);
+  oled.setCursor(0,15);
+  oled.print(tempe, 1);
+  oled.setCursor(50,20);
   oled.setTextSize(1);
   oled.print(char(247));
   oled.print("C");
   
   oled.setTextSize(2);
-  oled.setCursor(90,30);
-  oled.print("Nan");
+  oled.setCursor(70,15);
+  oled.print(humidy,1);
+  oled.setCursor(120,20);
+  oled.setTextSize(1);
+  oled.print("%");
 
 
-  oled.setTextSize(2);
-  oled.setCursor(30,50);
-  oled.print("Nan");
-  oled.display();
- /*
-//affichage du temps et de la date   
+  oled.setTextSize(1);
+  oled.setCursor(30,40);
+  if (DateTime.hours < 10)
+  oled.print("0");
   
-  lcd_tempe.setCursor(5, 2);
-  if (dateTime.hours < 10)
-  lcd_tempe.print("0");
-  
-  lcd_tempe.print(dateTime.hours);
-  lcd_tempe.print(":");
+  oled.print(DateTime.hours);
+  oled.print(":");
  
-  if (dateTime.mins < 10){
-  lcd_tempe.print("0");
+  if (DateTime.mins < 10){
+  oled.print("0");
   }
-  lcd_tempe.print(dateTime.mins);  
-  lcd_tempe.print("'");
-  lcd_tempe.print(":");
+  oled.print(DateTime.mins);  
+  oled.print("'");
+  oled.print(":");
 
-  if (dateTime.sec < 10){
-  lcd_tempe.print("0");
+  if (DateTime.sec < 10){
+  oled.print("0");
   }
-  lcd_tempe.print(dateTime.sec);
-  lcd_tempe.print('"');
-    
-  lcd_tempe.setCursor(2, 3);
-  lcd_tempe.print(decode_dow(dateTime.dow));
-  lcd_tempe.print(" ");
-  if (dateTime.dom < 10)
-  lcd_tempe.print("0");
+  oled.print(DateTime.sec);
+  oled.print('"');
+
+  oled.setTextSize(1);
+  oled.setCursor(20,50);
+  oled.print(decode_dow(DateTime.dow));
+  oled.print(" ");
+  if (DateTime.dom < 10)
+  oled.print("0");
   
-  lcd_tempe.print(dateTime.dom);
-  lcd_tempe.print(" ");
-  lcd_tempe.print(decode_month(dateTime.month));
-  lcd_tempe.print(" ");
-  lcd_tempe.print(dateTime.year + 2000);
-*/}
+  oled.print(DateTime.dom);
+  oled.print(" ");
+  oled.print(decode_month(DateTime.month));
+  oled.print(" ");
+  oled.print(DateTime.year + 2000);  oled.display();
+}
 
 #endif //Oled

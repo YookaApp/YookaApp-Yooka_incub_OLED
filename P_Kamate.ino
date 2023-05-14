@@ -31,7 +31,7 @@ bool state_buzzer =0;
 void beginer(){
   
   valider = false;
-  //Serial.begin(9600);
+  Serial.begin(9600);
   Wire.begin(); //initialisation de la voie i2c
   oled.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS);
 
@@ -65,8 +65,8 @@ void setup() {
     temp_buzzer = millis();
     
   //(sec, mins, heur, dow, dom, moi, an) mise a jours de l'heure et de la date
-  //update_time(0, 4, 18, 3, 19, 10, 22);
-  //heure_actuelle = dateTime.hours;  //on sauvegarde l'heure aussi 
+  //update_time(0, 53, 16, 5, 5, 5, 23);
+  HourNow = DateTime.incremente_hours;
   initial_retournement();
   wdt_reset(); // remise a zero du compteur de watch dog avant la boucle principale: loop()
  } 
@@ -79,7 +79,9 @@ void loop() {
      
      // telechargement des donnees apres chaque seconde
       download_time(&DateTime); // mise a jour de l'heure      
-      getTemperature(&tempe);  //mise a jour de la temperature            
+      getTemperature(&tempe);  //mise a jour de la temperature 
+      humidy = (tempe * 4)/3;
+      Serial.println(DateTime.incremente_hours);           
       affichage();
 
   }
@@ -134,7 +136,7 @@ void control_leds(){
 
 void control_buzzer(){
  
-  if(tempe > 38.4 || tempe < 25 ){  
+  if(tempe > 38.4 || tempe < 25 || valider){  
        if(( millis() - temp_buzzer) >= 500){
         temp_buzzer= millis();
         state_buzzer= !state_buzzer;
@@ -145,3 +147,5 @@ void control_buzzer(){
   else 
     digitalWrite(BUZZER, LOW);
 }
+
+// final Programme
