@@ -9,8 +9,6 @@ void affichage(){
   oled.clearDisplay();
   oled.setTextSize(1);
   oled.setTextColor(SSD1306_WHITE);
-  oled.setCursor(40,0);
-  oled.println("Incubator");
   
   oled.setTextSize(2);
   oled.setCursor(0,15);

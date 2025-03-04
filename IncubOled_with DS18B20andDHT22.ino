@@ -13,14 +13,17 @@ Adafruit_SSD1306 oled(128, 64, &Wire, OLED_RESET);
 #include "rtc.h"
 #include "ds18.h"
 #include "moteur.h"
+#include "dht.h"
 
 // leds pour le control de la temperature
-#define RED_LED_T 1
+#define RED_LED_T 9
 #define GREEN_LED_T 10
 
 //AUTRES
 #define BUZZER 13
 #define RELAIS_RES 8
+#define DHT_PIN 3
+#define RELAIS_BRIS 11
 
 // variables gerant le clignotement des led et le son du buzzer
 unsigned long temp_lcd, temp_red_led, temp_buzzer;
@@ -40,7 +43,7 @@ void beginer(){
     
   pinMode(BUZZER, OUTPUT);
   pinMode(RELAIS_RES , OUTPUT);
-  //pinMode(RELAIS_BRIS, OUTPUT);
+  pinMode(RELAIS_BRIS, OUTPUT);
 
   //pins du moteur
   pinMode(PIN_MOTEUR_a, OUTPUT);
@@ -80,12 +83,12 @@ void loop() {
      // telechargement des donnees apres chaque seconde
       download_time(&DateTime); // mise a jour de l'heure      
       getTemperature(&tempe);  //mise a jour de la temperature 
-      humidy = (tempe * 4)/3;
+    readDHT( DHT_PIN, &dhtTempe, &humidy );
       Serial.println(DateTime.incremente_hours);           
       affichage();
 
   }
-  wdt_reset(); // a la fin de chaque boucle on initialise le compteur */
+  wdt_reset(); // a la fin de chaque boucle on initialise le compteur 
 }
 
 void appel_fonction(){
@@ -103,14 +106,33 @@ void appel_fonction(){
 
 
 void control_temperature(){
-
+ 
+   if( tempe >= 38.4){      // checking temperature value
+    state_brimasseur = true; // if >, stop It 
+   } 
   if(tempe <= 37.5){
    digitalWrite(RELAIS_RES, HIGH);
   }
 
-  else if(tempe > 37.76){
+  else if(tempe > 37.75){
    digitalWrite(RELAIS_RES, LOW);
     }
+}
+
+void control_humidity(){
+  if(state_brimasseur){
+      digitalWrite(RELAIS_BRIS, LOW);
+  }
+  
+  else {
+      if(humidy < 55){
+      digitalWrite(RELAIS_BRIS, HIGH);
+    }
+  
+    else if(humidy > 60){
+      digitalWrite(RELAIS_BRIS, LOW);
+    }   
+  } 
 }
 
 
